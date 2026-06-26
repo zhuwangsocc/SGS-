@@ -1,0 +1,33 @@
+# Project: SGS 5.0
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = TEST_private.res
+OBJ      = "SGS\ 5.0.o" $(RES)
+LINKOBJ  = "SGS 5.0.o" $(RES)
+LIBS     = -L"D:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" -static-libgcc -m32
+INCS     = -I"D:/Dev-Cpp/MinGW64/include" -I"D:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"D:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"D:/Dev-Cpp/MinGW64/include" -I"D:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"D:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"D:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = TEST.exe
+CXXFLAGS = $(CXXINCS) -m32
+CFLAGS   = $(INCS) -m32
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+"SGS\ 5.0.o": SGS\ 5.0.cpp
+	$(CPP) -c "SGS 5.0.cpp" -o "SGS 5.0.o" $(CXXFLAGS)
+
+TEST_private.res: TEST_private.rc Autorun.rc
+	$(WINDRES) -i TEST_private.rc -F pe-i386 --input-format=rc -o TEST_private.res -O coff 
+
